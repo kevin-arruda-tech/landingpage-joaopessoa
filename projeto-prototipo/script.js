@@ -1,15 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ==========================================================================
-       MÓDULO 1: BOTÃO FLUTUANTE DE VOLTAR AO TOPO
-       ========================================================================== */
     const btnTopo = document.createElement('button');
     btnTopo.id = 'btn-voltar-topo';
     btnTopo.type = 'button';
     btnTopo.setAttribute('aria-label', 'Voltar ao topo da página');
-    btnTopo.innerHTML = '&#8593;'; // Símbolo da seta para cima (↑)
+    btnTopo.innerHTML = '&#8593;';
 
-    // Estilização direta respeitando a identidade visual da página
     Object.assign(btnTopo.style, {
         position: 'fixed',
         right: '1.5rem',
@@ -17,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         width: '3rem',
         height: '3rem',
         borderRadius: '50%',
-        backgroundColor: '#FCC31E', // --jp-amarelo
+        backgroundColor: '#FCC31E',
         color: '#000000',
         border: '3px solid #000000',
         fontSize: '1.5rem',
@@ -35,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(btnTopo);
 
-    // Monitora a rolagem para exibir ou ocultar
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
             btnTopo.style.opacity = '1';
@@ -46,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Ação de rolagem suave ao clicar
     btnTopo.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
@@ -55,13 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    /* ==========================================================================
-       MÓDULO 2: CARROSSEL INTERATIVO DE PONTOS TURÍSTICOS
-       ========================================================================== */
     const destaquesSection = document.getElementById('destaques');
 
     if (destaquesSection) {
-        // 1. Extração dos dados dos articles existentes na seção
         const cardsDestaques = destaquesSection.querySelectorAll('article');
         const slidesData = Array.from(cardsDestaques).map(article => {
             const titulo = article.querySelector('h3')?.innerText || '';
@@ -76,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (slidesData.length > 0) {
-            // 2. Criação da estrutura do carrossel aproveitando as classes do CSS
             const carouselContainer = document.createElement('div');
             carouselContainer.className = 'carousel';
             carouselContainer.style.position = 'relative';
@@ -104,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 carouselInner.appendChild(item);
             });
 
-            // Botões de navegação lateral (Prev / Next)
             const btnPrev = document.createElement('button');
             btnPrev.type = 'button';
             btnPrev.innerHTML = '&#10094;';
@@ -136,13 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
             carouselContainer.appendChild(btnPrev);
             carouselContainer.appendChild(btnNext);
 
-            // Inserção do carrossel logo após o parágrafo introdutório de #destaques
             const pIntro = destaquesSection.querySelector('p');
             if (pIntro) {
                 pIntro.after(carouselContainer);
             }
 
-            // 3. Controle dos slides e transição
             const items = carouselInner.querySelectorAll('.carousel-item');
             let currentIndex = 0;
             let autoPlayInterval = null;
@@ -159,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btnNext.addEventListener('click', nextSlide);
             btnPrev.addEventListener('click', prevSlide);
 
-            // Autoplay com intervalo de 5 segundos
             const startAutoplay = () => {
                 autoPlayInterval = setInterval(nextSlide, 5000);
             };
@@ -176,9 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ==========================================================================
-       MÓDULO 3: VALIDAÇÃO DO FORMULÁRIO E MÁSCARA DE TELEFONE
-       ========================================================================== */
     const formContato = document.querySelector('form[name="contato"]');
 
     if (formContato) {
@@ -188,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputMensagem = formContato.querySelector('#mensagem');
         const checkLgpd = formContato.querySelector('#lgpd');
 
-        // Elemento para exibir mensagens de feedback dinamicamente
         const statusMsg = document.createElement('div');
         statusMsg.style.display = 'none';
         statusMsg.style.padding = '0.75rem';
@@ -197,16 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
         statusMsg.style.border = '2px solid transparent';
         formContato.prepend(statusMsg);
 
-        // 1. Máscara de Telefone em Tempo Real: (83) 90101-0101 ou (83) 0101-0101
         inputTelefone.addEventListener('input', (e) => {
-            let digits = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+            let digits = e.target.value.replace(/\D/g, '');
 
             if (digits.length > 11) {
                 digits = digits.slice(0, 11);
             }
 
             if (digits.length > 6) {
-                // Formato para 11 dígitos: (XX) XXXXX-XXXX / 10 dígitos: (XX) XXXX-XXXX
                 const corte = digits.length === 11 ? 7 : 6;
                 e.target.value = `(${digits.slice(0, 2)}) ${digits.slice(2, corte)}-${digits.slice(corte)}`;
             } else if (digits.length > 2) {
@@ -218,24 +197,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 2. Função auxiliar para alternar borda de validação nos campos
         const setCampoStatus = (input, isValid) => {
-            input.style.borderColor = isValid ? '#259645' : '#E23A2E'; // --jp-verde ou --jp-vermelho
+            input.style.borderColor = isValid ? '#259645' : '#E23A2E';
         };
 
-        // Validação de formato de e-mail com regex padrão
         const isEmailValido = (email) => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email.trim());
         };
 
-        // 3. Interceptação do envio (Submit)
         formContato.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o recarregamento da página
+            e.preventDefault();
 
             let erros = [];
 
-            // Validação do Nome
             if (inputNome.value.trim().length < 3) {
                 setCampoStatus(inputNome, false);
                 erros.push('O nome deve conter pelo menos 3 caracteres.');
@@ -243,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 setCampoStatus(inputNome, true);
             }
 
-            // Validação do E-mail
             if (!isEmailValido(inputEmail.value)) {
                 setCampoStatus(inputEmail, false);
                 erros.push('Informe um endereço de e-mail válido.');
@@ -251,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 setCampoStatus(inputEmail, true);
             }
 
-            // Validação do Telefone (mínimo 10 dígitos: DDD + número)
             const digitosTelefone = inputTelefone.value.replace(/\D/g, '');
             if (digitosTelefone.length < 10 || digitosTelefone.length > 11) {
                 setCampoStatus(inputTelefone, false);
@@ -260,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 setCampoStatus(inputTelefone, true);
             }
 
-            // Validação da Mensagem
             if (inputMensagem.value.trim().length < 10) {
                 setCampoStatus(inputMensagem, false);
                 erros.push('A mensagem deve ter pelo menos 10 caracteres.');
@@ -268,12 +240,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 setCampoStatus(inputMensagem, true);
             }
 
-            // Validação do Consentimento LGPD
             if (!checkLgpd.checked) {
                 erros.push('Você deve aceitar os termos da LGPD para continuar.');
             }
 
-            // 4. Exibição do resultado
             if (erros.length > 0) {
                 statusMsg.style.display = 'block';
                 statusMsg.style.backgroundColor = '#ffebe9';
@@ -289,12 +259,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 formContato.reset();
 
-                // Limpa as bordas de feedback após o envio
                 [inputNome, inputEmail, inputTelefone, inputMensagem].forEach(campo => {
                     campo.style.borderColor = '#333333';
                 });
 
-                // Oculta a mensagem de sucesso após 6 segundos
                 setTimeout(() => {
                     statusMsg.style.display = 'none';
                 }, 6000);
