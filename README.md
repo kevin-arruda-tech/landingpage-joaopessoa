@@ -3,12 +3,14 @@
 > **Onde o sol nasce primeiro nas Américas.**  
 > Projeto web desenvolvido para apresentar os atrativos turísticos, a história e os diferenciais de qualidade de vida da capital paraibana.
 
+**Acesse o site:** [https://joaopessoaturismo.netlify.app/](https://joaopessoaturismo.netlify.app/)
+
 [![Status](https://img.shields.io/badge/Status-Concluído-259645?style=flat-square)](#)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](#)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](#)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](#)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](#)
-[![Deploy](https://img.shields.io/badge/Deploy-Netlify-00C7B7?style=flat-square&logo=netlify&logoColor=white)](#)
+[![Deploy](https://img.shields.io/badge/Deploy-Netlify-00C7B7?style=flat-square&logo=netlify&logoColor=white)](https://joaopessoaturismo.netlify.app/)
 
 ---
 
@@ -32,7 +34,7 @@ O site foi planejado para ser leve, rápido e fácil de navegar em qualquer apar
 * **Funciona em Qualquer Tela:** O visual se adapta automaticamente ao tamanho da tela, oferecendo uma ótima experiência tanto no celular quanto no tablet ou computador.
 * **Código Organizado:** A estrutura do conteúdo, o visual e as interações foram divididos de forma clara, facilitando futuras atualizações e melhorias na página.
 * **Carregamento Rápido:** O mapa interativo e os recursos visuais foram integrados de modo a não deixar o site pesado ou lento para o usuário.
-* **Publicação Online:** O projeto está conectado ao **GitHub** e publicado na plataforma **Netlify**, permitindo acesso imediato via navegador.
+* **Publicação Online:** O projeto está conectado ao **GitHub** e publicado na plataforma **Netlify**, permitindo acesso imediato via navegador pelo link [joaopessoaturismo.netlify.app](https://joaopessoaturismo.netlify.app/).
 
 ---
 
@@ -49,6 +51,13 @@ O site foi planejado para ser leve, rápido e fácil de navegar em qualquer apar
 
 ## Como Visualizar o Projeto
 
+**Online:** acesse [https://joaopessoaturismo.netlify.app/](https://joaopessoaturismo.netlify.app/) em qualquer navegador, no celular ou no computador.
+
+**No seu computador:**
+
 1. Baixe ou clone este repositório pelo **GitHub**:
    ```bash
-   git clone [https://github.com/seu-usuario/projeto-integrador.git](https://github.com/seu-usuario/projeto-integrador.git)
+   git clone https://github.com/SEU-USUARIO/landingpage-joaopessoa.git
+   ```
+2. Abra a pasta `projeto-integrador`.
+3. Dê dois cliques no arquivo `index.html` para abrir o site no navegador.
